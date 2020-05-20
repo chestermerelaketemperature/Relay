@@ -1,0 +1,54 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+plugins {
+	id 'com.github.johnrengelman.shadow' version '5.2.0'
+	id 'eclipse'
+	id 'java'
+}
+
+group 'com.chestermere.lake.temperature'
+version '1.0.0'
+
+repositories {
+    mavenCentral()
+
+	// Japson
+	maven {
+		url 'https://maven.pkg.github.com/Sitrica/Japson/'
+		credentials {
+            username = "Sitrica"
+            password = System.getenv("GITHUB_PACKAGES_KEY")
+        }
+	}
+
+}
+
+dependencies {
+
+	// Japson
+	shadow (group: 'com.sitrica', name: 'japson-beta', version: '1.0.5.1-SNAPSHOT')
+
+	// Google Guava
+	shadow (group: 'com.google.guava', name: 'guava', version: '29.0-jre')
+
+	// Japson
+	shadow (group: 'net.sf.bluecove', name: 'bluecove', version: '2.1.0')
+
+	//shadow fileTree(dir: 'libraries', include: '*.jar')
+
+}
+
+processResources {
+	filter ReplaceTokens, tokens: ["version": version]
+	from (sourceSets.main.resources.srcDirs) {
+		include '*.yml'
+	}
+}
+
+shadowJar {
+	configurations = [project.configurations.shadow]
+	archiveVersion = version
+	baseName = project.name
+	classifier = ''
+	minimize()
+}
