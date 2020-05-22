@@ -2,11 +2,13 @@ import org.apache.tools.ant.filters.ReplaceTokens
 
 plugins {
 	id 'com.github.johnrengelman.shadow' version '5.2.0'
+	id 'application'
 	id 'eclipse'
 	id 'java'
 }
 
 group 'com.chestermere.lake.temperature'
+mainClassName = group + '.Relay'
 version '1.0.0'
 
 repositories {
@@ -21,6 +23,10 @@ repositories {
         }
 	}
 
+	flatDir {
+		dirs 'libraries'
+	}
+
 }
 
 dependencies {
@@ -28,11 +34,11 @@ dependencies {
 	// Japson
 	shadow (group: 'com.sitrica', name: 'japson-beta', version: '1.0.5.1-SNAPSHOT')
 
+	// BlueCove
+	shadow (group: 'net.sf.bluecove', name: 'bluecove', version: '2.1.1-SNAPSHOT')
+
 	// Google Guava
 	shadow (group: 'com.google.guava', name: 'guava', version: '29.0-jre')
-
-	// Japson
-	shadow (group: 'net.sf.bluecove', name: 'bluecove', version: '2.1.0')
 
 	//shadow fileTree(dir: 'libraries', include: '*.jar')
 
@@ -50,5 +56,5 @@ shadowJar {
 	archiveVersion = version
 	baseName = project.name
 	classifier = ''
-	minimize()
+//	minimize()
 }
