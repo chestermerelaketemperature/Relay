@@ -1,6 +1,7 @@
 package com.chestermere.lake.temperature.packets;
 
 import com.sitrica.japson.gson.Gson;
+import com.sitrica.japson.gson.JsonObject;
 import com.sitrica.japson.shared.Packet;
 
 public class TemperaturePacket extends Packet {
@@ -14,6 +15,7 @@ public class TemperaturePacket extends Packet {
 
 	@Override
 	public String toJson(Gson gson) {
+		JsonObject object = new JsonObject();
 		object.addProperty("temperature", temperature);
 		return gson.toJson(object);
 	}
