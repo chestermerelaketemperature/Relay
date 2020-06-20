@@ -22,7 +22,7 @@ public class Relay {
 
 	public static void main(String[] args) {
 		try {
-			japson = new JapsonClient("chestermerelaketemperature.com", 1337);
+			japson = new JapsonClient(/*"chestermerelaketemperature.com", TESTING*/1337);
 			japson.enableDebug();
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
@@ -34,7 +34,7 @@ public class Relay {
 				TemperatureFinder finder = new TemperatureFinder(connection.openInputStream());
 				while (connection != null) {
 					try {
-						Optional<Float> temperature = finder.getTemperature().get(10, TimeUnit.SECONDS);
+						Optional<Float> temperature = finder.getTemperature().get(5, TimeUnit.SECONDS);
 						if (temperature.isPresent())
 							japson.sendPacket(new TemperaturePacket(temperature.get()));
 					} catch (InterruptedException | ExecutionException | TimeoutException e) {
