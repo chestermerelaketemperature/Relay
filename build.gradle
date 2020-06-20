@@ -56,5 +56,4 @@ shadowJar {
 	archiveVersion = version
 	baseName = project.name
 	classifier = ''
-//	minimize()
 }
