@@ -40,7 +40,7 @@ dependencies {
 	// Google Guava
 	shadow (group: 'com.google.guava', name: 'guava', version: '29.0-jre')
 
-	//shadow fileTree(dir: 'libraries', include: '*.jar')
+	shadow fileTree(dir: 'libraries', include: '*.jar')
 
 }
 
